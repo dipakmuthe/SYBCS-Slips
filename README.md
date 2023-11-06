@@ -1,2 +1,2 @@
 # SYBCS-Slips
-Comming Soon
+SEM-III
