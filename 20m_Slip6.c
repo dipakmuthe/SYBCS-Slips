@@ -1,4 +1,3 @@
-
 /*Q2. Implement a queue library (dyqueue.h) of integers using a dynamic 
  (linked list) implementation of the queue and implement init, enqueue, 
  dequeue, isempty, peek operations. [20]
