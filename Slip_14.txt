@@ -1,0 +1,45 @@
+Q1. Create a random array of n integers. Accept a value x from user and use 
+linear search algorithm to check whether the number is present in the array 
+or not and output the position if the number is present. [10]
+==>
+
+  #include<stdio.h>
+int main()
+{
+	int a[100],n,i,num;
+	printf("enter limit");
+	scanf("%d",&n);
+	for(i=0;i<n;i++)
+	a[i]=rand()%100;
+	
+	printf("random number");
+	for(i=0;i<n;i++)
+	printf("%d",a[i]);
+	
+	
+	printf("enter number to search");
+	scanf("%d",&num);
+	for(i=0;i<n;i++)
+	{
+		if(a[i]==num)
+		break;
+	}
+	if(i==n)
+	printf("No is not found");
+	else
+	printf("No is found position=%d",i);
+}
+
+
+Q2. A doubly ended queue allows additions and deletions from both the ends 
+that is front and rear. Initially additions from the front will not be possible. 
+To avoid this situation, the array can be treated as if it were circular. 
+Implement a queue library (dstqueue.h) of integers using a static 
+implementation of the circular queue and implementing the following
+operations. [20]
+a. isFull(Q)
+b. addFront(Q)
+c. getRear(Q)
+d. deleteRear(Q)
+==>
+

@@ -1,0 +1,146 @@
+Q1. Read the data from file 'cities.txt' containing names of cities and their STD 
+codes. Accept a name of the city from user and use linear search algorithm to 
+check whether the name is present in the file and output the STD code, 
+otherwise output “city not in the list”. [10]
+==>
+  #include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+int main()
+{
+	int flag=0,scode;
+	char cname[20],s1[20];
+	
+	FILE *fp1;
+	fp1=fopen("city.txt","r");
+	if(fp1==NULL)
+	{
+		printf("file is not found");
+		exit(0);
+	}
+	
+	printf("enter city name to search");
+	scanf("%s",&s1);
+	while(!feof(fp1))
+	{
+		fscanf(fp1,"%s%d",&cname,&scode);
+		
+		if(strcmp(cname,s1)==0)
+		{
+			flag=1;
+			break;
+		}
+	}
+	
+	if(flag==1)
+	printf("city is found std code=%d",scode);
+	else
+	printf("city is not list");
+	fclose(fp1);
+}
+
+
+
+Q2.Implement a circular queue library (cir_queue.h) of integers using a 
+dynamic (circular linked list) implementation of the queue and implementing 
+init(Q), AddQueue(Q) and DeleteQueue(Q) operations. Write a menu driven 
+program that includes queue library and calls different queue operations. [20]
+
+==>
+
+#define memory (struct node*)malloc(sizeof(struct node))
+struct node
+{
+   int data;
+   struct node *next;
+}*front,*rear,*newnode,*temp;
+void init()
+{
+	front=rear=NULL;
+	}
+int isempty()
+	{
+	if(front==NULL)
+	return 1;
+	else
+	return 0;
+	}
+void insertq(int num)
+	{
+	newnode=memory;
+	newnode->data=num;
+	newnode->next=front;
+	if(isempty())
+	front=rear=newnode;
+	else
+	{
+	rear->next=newnode;
+	rear=newnode;
+	newnode->next=front;
+	printf("\n insert successfully:");
+	}
+}
+void delq()
+	{
+	int val;
+	if(isempty())
+	{
+	printf("queue is underflow:");
+	}
+	else
+	{
+	temp=front;
+	val=front->data;
+	if(front->next==front)
+	{
+	free(front);
+	}
+	else
+	{
+	front=front->next;
+	rear->next=front;
+	free(temp);
+	}
+	printf("\n deleted value=%d",val);
+	}
+}
+	void disp()
+	{
+	temp=front;
+	do
+	{
+	printf("%d\t",temp->data);
+	temp=temp->next;
+	}while(temp!=front);
+}
+
+
+
+
+ // program file:-//
+
+ #include<stdio.h>
+#include<stdlib.h>
+#include<malloc.h>
+#include"cirqueue.h"
+int main()
+	{
+	int num,ch;
+	init();
+	do
+	{
+	printf("\n 1-insert \n 2-del\n 3-disp:");
+	scanf("%d",&ch);
+	switch(ch)
+	{
+	case 1:printf("enter number:");
+		scanf("%d",&num);
+		insertq(num);
+		break;
+	case 2:delq();
+		break;
+	case 3:disp();
+		break;
+	}
+}while(ch<4);
+}

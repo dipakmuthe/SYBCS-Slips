@@ -1,0 +1,167 @@
+Q1. Implement a list library (singlylist.h) for a singly linked list of integer 
+ With the operations create, delete specific element and display. Write a 
+ menu driven program to call these operations [10]
+==> #include<stdlib.h> 
+#include<stdio.h>
+ struct node 
+ { 
+   int data; 
+   struct node *next; 
+ }; 
+ struct node* create(struct node *head) 
+ { 
+   int n,i; 
+   struct node *newnode,*temp; 
+   printf("enter limit"); 
+   scanf("%d",&n); 
+   for(i=0;i<n;i++) 
+ { 
+   newnode=(struct node*)malloc(sizeof(struct node)); 
+   printf("enter value"); 
+   scanf("%d",&newnode->data); 
+   newnode->next=NULL; 
+  if(head==NULL) 
+ { 
+   head=newnode; 
+   temp=newnode; 
+ } 
+  else 
+ { 
+   temp->next=newnode; 
+  temp=newnode; 
+ } 
+ } 
+ return head; 
+ } 
+  
+  void disp(struct node *head) 
+ { 
+   struct node *temp; 
+   for(temp=head;temp!=NULL;temp=temp->next) 
+  { 
+    printf("%d \t",temp->data); 
+ } 
+ } 
+struct node *del(struct node *head,int value) 
+ { 
+   struct node *temp=head;
+   struct node *temp1=head->next;
+  while(temp1->data!=value && temp1->next!=NULL)
+{
+   temp=temp->next;
+   temp1=temp1->next;
+} 
+  if(temp1->data== value)
+  {
+    temp->next=temp1->next;
+   free(temp1);
+  } 
+ return head; 
+ }
+
+ int main() 
+ { 
+   int ch,value;
+   struct node *head=NULL; 
+  
+   do{
+   	  printf("\n 1-Create \n 2-Display \n 3-Delete Specific Element");
+   	  printf("\n Enter the choice:");
+   	  scanf("%d",&ch);
+       switch(ch)
+       {
+       	 case 1: head=create(head); 
+       	         break;
+       	 case 2: disp(head); 
+       	 		 break;
+       	 case 3: printf("\n Enter Element Position to delete:");
+       	 		 scanf("%d",&value);
+       	 		 head=del(head,value);
+       	 		 printf("\n List After deleted Element ");
+       	 		disp(head);
+       	 		break;
+       	 default :printf("\n Invalid Choice....");
+	   }
+   
+   }while(ch<4);
+ }
+
+Q2. Write a C program to check whether the contents of two stacks are
+ identical. Use stack library to perform basic stack operations. Neither 
+ stack should be changed. [20]
+==> 
+#include<stdio.h>
+#include<ctype.h>
+#define MAX 25
+struct stack{
+char a[MAX];
+int top;
+}s1;
+void init()
+{
+        s1.top=-1;
+}
+int isempty()
+{
+        if(s1.top==-1)
+        return 1;
+        else
+        return 0;
+}
+int isfull()
+{
+        if(s1.top==MAX-1)
+        return 1;
+        else
+        return 0;
+}
+void push(char x)
+{
+        if(isfull())
+        printf("Stack Is Full Now");
+        else
+        {
+           s1.top++;
+           s1.a[s1.top]=x;
+        }
+}
+char pop()
+{
+        char ch;
+        if(isempty())
+        printf("Stack Is Empty Now");
+        else
+        {
+          ch=s1.a[s1.top];
+          s1.top--;
+          return ch;
+        }
+}
+int main()
+{
+        char p[30],q[30];
+        int i,k=0;
+        init();
+        printf("Enter String 1=");
+        scanf("%s",&p);
+        for(i=0;p[i]!='\0';i++)
+        push(p[i]);
+
+        while(!isempty())
+        {
+           q[k++]=pop();
+        }
+        q[k++]='\0';
+
+        for(i=0;q[i]!='\0';i++)
+        {
+           push(q[i]);
+        }
+
+        while(!isempty())
+        {
+           printf("%c",pop());
+        }
+}
+
+

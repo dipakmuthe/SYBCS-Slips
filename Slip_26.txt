@@ -1,0 +1,178 @@
+Q1. Implement a stack library (ststack.h) of integers using a static
+implementation of the stack and implementing the operations like init(S), 
+S=Push(S,x) and isEmpty(S). Write a driver program that includes stack library 
+and calls different stack operations. [10]
+
+==>
+
+#include <stdio.h>
+#include "ststack.h"
+int main()
+{
+    int ch, num;
+    do
+    {
+        printf("enter choice\n1-push\n2-pop\n3-disp");
+        scanf("%d", &ch);
+        switch (ch)
+        {
+        case 1:
+            printf("enter num");
+            scanf("%d", &num);
+            push(num);
+            break;
+        case 2:
+            pop();
+            break;
+        case 3:
+            disp();
+        }
+    } while (ch < 4);
+}
+
+********ststack.h ***********
+
+#include <stdio.h>
+#include <stdlib.h>
+#define max 5
+        struct stack
+{
+    int data[max];
+    int top;
+} s;
+void init()
+{
+    s.top = -1;
+}
+int isempty()
+{
+    if (s.top == -1)
+        return 1;
+    else
+        return 0;
+}
+int isfull()
+{
+    if (s.top == max - 1)
+        return 1;
+    else
+        return 0;
+}
+void push(int num)
+{
+    if (isfull())
+    {
+        printf("overflow");
+    }
+    else
+    {
+        s.top++;
+        s.data[s.top] = num;
+        printf("push succ...");
+    }
+}
+void pop()
+{
+    int val;
+    if (isempty())
+        printf("underflow");
+    else
+    {
+        val = s.data[s.top];
+        s.top--;
+        printf("pop succ..");
+    }
+}
+void disp()
+{
+    int i;
+    for (i = s.top; i >= 0; i--)
+    {
+        printf("%d\n", s.data[i]);
+    }
+}
+
+Q2. There are lists where insertion should ensure the ordering of data elements. 
+Since the elements are in ascending order the search can terminate once equal 
+or greater element is found. Implement a singly linked list of ordered integers
+(ascending/descending) with insert, search, and display operations. 
+ [20]
+
+==> 
+#include <stdio.h>
+#include <stdlib.h>
+typedef struct node
+{
+    int data;
+    struct node *next;
+} node;
+#define nodealloc (node *)malloc(sizeof(node));
+node *create(node *list)
+{
+    int n, i;
+    node *temp, *newnode;
+    printf("enter limit");
+    scanf("%d", &n);
+    for (i = 0; i < n; i++)
+    {
+        newnode = nodealloc;
+        printf("enter val");
+        scanf("%d", &newnode->data);
+        if (list == NULL)
+        {
+            list = temp = newnode;
+            list->next = NULL;
+        }
+        else
+        {
+            temp->next = newnode;
+            temp = newnode;
+        }
+    }
+    return list;
+}
+void disp(node *list)
+{
+    node *temp;
+    for (temp = list; temp != NULL; temp = temp->next)
+    {
+        printf("%d\t", temp->data);
+    }
+}
+void search(node *list)
+{
+    int num;
+    node *temp;
+    printf("enter num");
+    scanf("%d", &num);
+    for (temp = list; temp != NULL; temp = temp->next)
+    {
+        if (num <= temp->data)
+        {
+            printf("data is greater or equal");
+            exit(0);
+        }
+    }
+    printf("data is less");
+}
+int main()
+{
+    node *list = NULL;
+    int i, ch;
+    do
+    {
+        printf("enter choice\n1-create\n2-disp\n3-search=\t");
+        scanf("%d", &ch);
+        switch (ch)
+        {
+        case 1:
+            list = create(list);
+            break;
+        case 2:
+            disp(list);
+            break;
+        case 3:
+            search(list);
+        }
+    } while (ch < 4);
+}

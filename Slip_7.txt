@@ -1,0 +1,135 @@
+Q1. Sort a random array of n integers (accept the value of n from user) in 
+ ascending order by using quick sort algorithm. [10]
+==>
+   #include<stdio.h>
+int a[20],n; 
+int quicksort(int a[],int s,int e)
+{
+  int pivot,next,prev,temp;
+  pivot=a[s];
+  next=s+1;
+  prev=e;
+ 
+do
+{
+ while((a[next]<pivot)&&(next<=e))
+{
+  next++;
+}
+while((a[prev]>pivot)&&(prev>s))
+{
+ prev--;
+}
+if(next<prev)
+{
+  temp=a[prev];
+  a[prev]=a[next];
+   a[next]=temp;
+}
+}while(next<prev);
+ a[s]=a[prev];
+  a[prev]=pivot;
+   return prev;
+}
+void divide(int a[],int s,int e)
+{
+   int pos;
+  if(s<e)
+{
+  pos=quicksort(a,s,e);
+  divide(a,s,pos-1);
+   divide(a,pos+1,e);
+ }
+}
+
+int main()
+{
+ int i,a[20],n;
+ printf("enter limit");
+ scanf("%d",&n);
+ printf("enter n number");
+ for(i=0;i<n;i++)
+ scanf("%d",&a[i]);
+ divide(a,0,n-1);
+
+ printf("\n sorted no=");
+ for(i=0;i<n;i++)
+{
+ printf("%d\t",a[i]);
+}
+}
+
+Q2. Write a program that checks whether a string of characters is palindrome 
+ or not. The function should use a stack library (cststack.h) of stack of 
+ characters using a static implementation of the stack. [20]
+==>
+   
+#include<stdio.h>
+#define MAX 50
+struct stack
+{
+   char data[MAX];
+   int top;
+}s;
+void init()
+{
+  s.top=-1;
+}
+int isfull()
+{
+  if(s.top==MAX-1)
+    return 1;
+  else
+   return 0;   
+}
+int isempty()
+{
+  if(s.top==-1)
+    return 1;
+  else
+   return 0;   
+}
+void push(char c)
+{
+  if(isfull())
+    printf("Stack is full don't push");
+  else
+  {
+     s.top++;
+     s.data[s.top]=c;
+  }
+}
+char pop()
+{
+   char val;
+    if(isempty())
+       printf("Stack iis empty don't pop");
+    else
+    {
+       val=s.data[s.top];
+       s.top--;
+      return val; 
+    }
+}
+int main()
+{
+  char s1[50];
+  int i;
+  init();
+  printf("Enter string:");
+  gets(s1);
+  for(i=0;s1[i]!='\0';i++)
+  {
+     push(s1[i]);
+  }  
+  for(i=0;s1[i]!='\0';i++)
+  {
+     if(s1[i]!=pop())
+      break;
+  }
+  if(isempty())
+     printf("String is palindrome");
+  else
+   printf("String is not palindrome");
+}
+

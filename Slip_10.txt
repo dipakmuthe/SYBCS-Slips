@@ -1,0 +1,248 @@
+Q1. Implement a linear queue library (st_queue.h) of integers using a static 
+implementation of the queue and implementing the init(Q), add(Q) and peek(Q) 
+operations. Write a program that includes queue library and calls different 
+queue operations [10]
+==>
+
+#include<stdio.h>
+#define MAX 5
+struct Queue
+{
+	int a[MAX];
+	int front,rear;
+}q;
+void init()
+{
+	q.front=-1;
+	q.rear=-1;
+}
+int isempty()
+{
+	if(q.front==-1 || q.front>q.rear)
+	return 1;
+	else
+	return 0;
+}
+int isfull()
+{
+	if(q.rear==MAX-1)
+	return 1;
+	else
+	return 0;
+}
+void insert(int num)
+{
+
+	if(isfull())
+	{
+		printf("queue is overflow:");
+	}
+	else
+	{
+		if(q.front==-1)
+		
+			q.front=0;
+	
+		q.rear++;
+		q.a[q.rear]=num;
+	}
+}
+void deleteq()
+{
+	int val;
+	if(isempty())
+	{
+		printf("queue is underflow");
+	}
+	else
+	{
+		val=q.a[q.front];
+		q.front++;
+	printf("%d\t ",val);
+	}
+	
+}
+void disp()
+{
+	int i;
+	for(i=q.front;i<=q.rear;i++)
+	{
+		printf("%d\t",q.a[i]);
+	}
+}
+int main()
+{
+	int ch,num;
+	init();
+	do
+	{
+	printf("\n1-insert \n2-delete \n3-display");
+	printf("\nEnter your choice:");
+	scanf("%d",&ch);
+	switch(ch)
+	
+	{
+		case 1:printf("Enter number:");
+   	           scanf("%d",&num);
+		       insert(num);
+		       break;
+		case 2:deleteq();
+		       break;
+	   	case 3:disp();
+		       break;       
+	}
+}while(ch<4);
+}
+
+
+Q2. Read the data from the file “employee.txt” and sort on names in 
+alphabetical order (use strcmp) using bubble sort and selection sort. [20]
+==>
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+struct emp
+{
+        char ename[20];
+}e1[100],t;
+        void bubble(struct emp e1[100],int n)
+        {
+                int i,pass;
+                for(pass=1;pass<n;pass++)
+        {
+                for(i=0;i<n-pass;i++)
+        {
+        if(strcmp(e1[i].ename,e1[i+1].ename)>0)
+        {
+                t=e1[i];
+                e1[i]=e1[i+1];
+                e1[i+1]=t;
+        }
+        }
+}
+        printf("bubble sort:");
+        for(i=0;i<n;i++)
+        printf("\n%s",e1[i].ename);
+}
+        void selection(struct emp e1[100],int n)
+        {
+        int i,j,index;
+        char min[20];
+        for(i=0;i<n;i++)
+        {
+        strcpy(min,e1[i].ename);
+        index=i;
+        for(j=i;j<n;j++)
+        {
+        if(strcmp(e1[j].ename,min)<0)
+        {       
+        strcpy(min,e1[j].ename);
+        index=j;
+        }
+        }
+        t=e1[i];
+        e1[i]=e1[index];
+        e1[index]=t;
+        }
+        printf("\n selection sort");
+        for(i=0;i<n;i++)
+        printf("\n%s",e1[i].ename);
+        }
+     int main()      
+        {
+        FILE *fp1;
+        int i=0,n;
+        fp1=fopen("emp.txt","r");
+        if(fp1==NULL)
+        {
+        printf("file not found:");
+        exit(0);
+        }
+        while(!feof(fp1))
+        {
+                fscanf(fp1,"\n%s",e1[i].ename);
+                i++;
+                }
+                n=i-1;
+                bubble(e1,n);
+                selection(e1,n);
+                fclose(fp1);
+                }
+
+
+------------------------------------------------------------------------
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+struct emp
+{
+        char ename[20];
+        int age;
+        int sal;
+        }e1[100],t;
+        void bubble(struct emp e1[100],int n)
+        {
+                int i,pass;
+                for(pass=1;pass<n;pass++)
+        {
+                for(i=0;i<n-pass;i++)
+        {
+        if(strcmp(e1[i].ename,e1[i+1].ename)>0)
+        {
+                t=e1[i];
+                e1[i]=e1[i+1];
+                e1[i+1]=t;
+        }
+        }
+}
+        printf("bubble sort:");
+        for(i=0;i<n;i++)
+        printf("%s\n %d\n %d\n",e1[i].ename,e1[i].age,e1[i].sal);
+}
+        void selection(struct emp e1[100],int n)
+        {
+        int i,j,index;
+        char min[20];
+        for(i=0;i<n;i++)
+        {
+        strcpy(min,e1[i].ename);
+        index=i;
+        for(j=i;j<n;j++)
+        {
+        if(strcmp(e1[j].ename,min)<0)
+        {       
+        strcpy(min,e1[j].ename);
+        index=j;
+        }
+        }
+        t=e1[i];
+        e1[i]=e1[index];
+        e1[index]=t;
+        }
+        printf("\n selection sort");
+        for(i=0;i<n;i++)
+        printf("%s\n %d\n%d\n ",e1[i].ename,e1[i].age,e1[i].sal);
+        }
+        int main()
+        {
+        FILE *fp1;
+        int i=0,n;
+        fp1=fopen("employee.txt","r");
+        if(fp1==NULL)
+        {
+        printf("file not found:");
+        exit(0);
+        }
+        while(!feof(fp1))
+        {
+                fscanf(fp1,"\n%s\n %d\n %d",e1[i].ename,&e1[i].age,&e1[i].sal);
+                i++;
+                }
+                n=i-1;
+                bubble(e1,n);
+                selection(e1,n);
+                fclose(fp1);
+                }
+
+

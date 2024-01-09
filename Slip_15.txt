@@ -1,0 +1,54 @@
+Q1. Sort a random array of n integers (accept the value of n from user) in 
+ascending order by using selection sort algorithm. [10]
+
+==>
+   #include<stdio.h>
+int main()
+{
+	int a[100],n,i;
+	void selection(int a[100],int n);
+	
+	printf("enter limit");
+	scanf("%d",&n);
+	printf("enter n array element");
+	for(i=0;i<n;i++)
+	{
+		scanf("%d",&a[i]);
+	}
+	selection(a,n);
+	
+}
+
+void selection(int a[100],int n)
+{
+	int i,j,min,index,t;
+	
+	for(i=0;i<n;i++)
+	{
+		min=a[i];
+		index=i;
+		for(j=i;j<n;j++)
+		{
+			if(a[j]<min)
+			{
+				min=a[j];
+				index=j;
+			}
+		}
+		t=a[i];
+		a[i]=a[index];
+		a[index]=t;
+	}
+	printf("\nsorted no=");
+	for(i=0;i<n;i++)
+	printf("%d",a[i]);
+}
+
+
+Q2. Implement a linear queue library (dyqueue.h) of integers using a dynamic 
+(circular linked list) implementation of the queue and implementing the 
+five queue operations (init(Q), AddQueue(Q, x), X=DeleteQueue(Q), 
+X=peek(Q), isEmpty(Q)). [20]
+Write a program to reverse the elements of a queue using queue library
+
+==>

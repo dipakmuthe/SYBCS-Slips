@@ -1,0 +1,180 @@
+Q1.Implement a stack library (ststack.h) of integers using a static 
+implementation of the stack and implementing the operations like init(S), 
+S=push(S), and X=peek(S). Write a driver program that includes stack library 
+and calls different stack operations. [10]
+==>
+
+#include <stdio.h>
+#include <stdlib.h>
+
+#define max 5
+struct stack
+{
+    int data[max];
+    int top;
+} s;
+
+void init()
+{
+    s.top = -1;
+}
+int isfull()
+{
+    if (s.top == max - 1)
+        return 1;
+    else
+        return 0;
+}
+int isempty()
+{
+    if (s.top == -1)
+        return 1;
+    else
+        return 0;
+}
+void push(int num)
+{
+    if (isfull())
+    {
+        printf("overflow");
+        exit(0);
+    }
+    else
+    {
+        s.top++;
+        s.data[s.top] = num;
+        printf("insert succ.....");
+    }
+}
+void pop()
+{
+    int val;
+    if (isempty())
+    {
+        printf("underflow");
+        exit(0);
+    }
+    else
+    {
+        val = s.data[s.top];
+        s.top--;
+        printf("del succ...=%d", val);
+    }
+}
+void disp()
+{
+    int i;
+    for (i = s.top; i >= 0; i--)
+    {
+        printf("%d\n", s.data[i]);
+    }
+}
+int main()
+{
+    init();
+    int i, num, ch;
+    do
+    {
+        printf("\nenter choice\n1-insert\n2-pop\n3-disp=");
+        scanf("%d", &ch);
+        switch (ch)
+        {
+        case 1:
+            printf("enter num");
+            scanf("%d", &num);
+            push(num);
+            break;
+        case 2:
+            pop();
+            break;
+        case 3:
+            disp();
+            break;
+        }
+    } while (ch < 3);
+}
+
+Q2. There are lists where new elements are always appended at the end of the 
+list. The list can be implemented as a circular list with the external pointer 
+pointing to the last element of the list. Implement singly linked circular list of 
+integers with append and display operations. The operation append(L, n), 
+appends to the end of the list, n integers accepted from user. [20
+==>
+
+#include<stdio.h>
+#include<stdlib.h>
+typedef struct node
+{
+ int data;
+ struct node* next;
+}node;
+#define nodealloc (node *)malloc(sizeof(node));
+
+node *create(node *list,int n)
+{
+ node *newnode,*temp;
+ int i;
+ for(i=0;i<n;i++)
+ {
+  newnode=nodealloc;
+  printf("enter val");
+  scanf("%d",&newnode->data);
+  if(list==NULL)
+  {
+   list=temp=newnode;
+   newnode->next=list;
+  }
+  else
+  {
+  temp->next=newnode;
+  newnode->next=list;
+  temp=newnode;
+  }
+  }
+ return list;
+}
+void disp(node *list)
+{
+ node *temp;
+ temp=list;
+ do
+ { 
+   printf("%d\t",temp->data);
+   temp=temp->next;
+ }
+ while(temp!=list);
+ }
+ node *appendl(node *list,int n)
+ {
+  node *newnode,*temp;
+  int i;
+  newnode=nodealloc;
+  printf("enter num");
+  scanf("%d",&newnode->data);
+  temp=list;
+  for(temp=list;temp->next!=list;temp=temp->next);
+  temp->next=newnode;
+  newnode->next=list;
+  return list;
+ }
+int main()
+{
+node *list=NULL;
+ int ch,n;
+ do
+ {
+ printf("enter choice\n1-create\n2-disp=\t\n3-append\n");
+ scanf("%d",&ch);
+ switch(ch)
+  {
+   case 1:printf("enter limit");
+          scanf("%d",&n);
+          list=create(list,n);
+          break;
+   case 2:disp(list);
+          break;
+   case 3:list=appendl(list,n);
+  }
+ }while(ch<4);
+}
+

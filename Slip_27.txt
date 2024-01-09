@@ -1,0 +1,12 @@
+Q1. Write a program that adds two single variablepolynomials. Each 
+polynomial should be represented as a list with linked list implementation.
+ [10]
+
+==>
+
+
+Q2.Read the data from the file and sort on names in alphabetical order (use 
+strcmp) using Counting sort, Merge sort and write the sorted data to another 
+file 'sortedemponname.txt' [20]
+==>
+

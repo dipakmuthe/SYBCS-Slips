@@ -1,0 +1,133 @@
+Q1. Read the ‘n’ numbers from user and sort using bubble sort. [10]
+==>#include<stdio.h>
+   int main()
+{
+	int a[100],n,i;
+	void bubble(int a[100],int n);
+	printf("enter limit :");
+	scanf("%d",&n);
+	
+	printf("enter n number : ");
+	for(i=0;i<n;i++)
+	{
+		scanf("%d",&a[i]);
+		
+	}
+	bubble(a,n);
+}
+	
+	
+	void bubble(int a[100],int n)
+	{
+		int i,t,pass;
+		for(pass=1;pass<n;pass++)
+		{
+			for(i=0;i<n-pass;i++)
+			{
+				if(a[i]>a[i+1])
+				{
+					t=a[i];
+					a[i]=a[i+1];
+					a[i+1]=t;
+				}
+			}
+		}
+		
+		printf("\n sorted no=");
+		for(i=0;i<n;i++)
+		printf("%d",a[i]);
+		
+	}
+
+
+
+Q2. Write a program to reverse the elements of a queue using queue library. 
+ Implement basic queue operations init, enqueue, dequeue. [20]
+==>
+
+
+
+#include<stdio.h>
+#include<stdlib.h>
+#define MAX 5
+struct stack
+{
+	char a[MAX];
+	int top;
+	}s;
+	void init()
+	{
+	s.top=-1;
+	}
+	int isempty()
+	{
+	if(s.top==-1)
+	return 1;
+	else
+	return 0;
+	}
+	int isfull()
+	{
+	if(s.top==MAX-1)
+	return 1;
+	else
+	return 0;
+	}
+	void push(struct stack s1,int val)
+	{
+	if(isfull())
+	printf("stack is full don't push:");
+	else
+	{
+	s.top++;
+	s.a[s.top]=val;
+	}
+}
+	char pop()
+	{
+	int val;
+	if(isempty())
+	printf("stack is empty don't pop");
+	else
+	{
+	val=s.a[s.top];
+	s.top--;
+	return val;
+	}
+	}
+	void disp()
+	{
+	int i;
+	for(i=s.top;i>=0;i--)
+	{
+	printf("%d\t",s.a[i]);
+	}
+}
+	int main()
+	{
+	int val,i,n;
+	struct stack s1,s2,temp;
+	init(s1);
+	init(s2);
+	init(temp);
+	printf("enter limit of stack:");
+	scanf("%d",&n);
+	for(i=0;i<n;i++)
+	{
+	printf("enter value:");
+	scanf("%d",&val);
+	push(s1,val);
+	}
+	for(i=s1.top;i>0;i--)
+	{
+	push(temp,s1.a[i]);
+	}
+	for(i=temp.top;i>0;i--)
+	{
+	push(s2,temp.a[i]);
+	}
+	printf("\n display original stack:");
+	disp(s1);
+	printf("\n display copy stack:");
+	disp(s2);
+	}

@@ -1,0 +1,11 @@
+Q1. Write a program to convert an infix expressionof the form (a*(b+c)*((da)/b))intoits equivalent postfix notation. Consider usual precedence’s of 
+operators. Use stack library of stack of characters using static implementation.
+ [10]
+
+==>
+
+Q2. Read the data from the ‘employee.txt’ file and sort on age using Counting 
+sort, Merge sort, Quick sort and write the sorted data to another file 
+'sortedemponage.txt'. [20]
+
+==>

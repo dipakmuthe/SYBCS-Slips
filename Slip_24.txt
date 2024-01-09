@@ -1,0 +1,12 @@
+Q1. Implement a circular queue library (cir_queue.h) of integers using a 
+dynamic (circular linked list) implementation of the queue and implementing 
+the operations like init (Q), AddQueue(Q, x) and isEmpty (Q). Write a menu 
+driven program that includes queue library and calls different queue operations. 
+ [10]
+
+==>
+
+Q2. Read the data from the file “employee.txt” and sort on names in 
+alphabetical order (use strcmp) using insertion sort and selection sort. [20]
+
+==>
